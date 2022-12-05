@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head></head>
+
+<body>
+    <iframe id="chat" style="width: 400px; height: 600px;" src=''></iframe>
+
+    <script>
+        const azureFunctionAppName = '';
+        const azureBotServiceName = '';
+
+        fetch(`https://${azureFunctionAppName}.azurewebsites.net/api/GenerateBotToken`)
+            .then((resp) => resp.text())
+            .then((token) => {
+                document.getElementById("chat").src = `https://webchat.botframework.com/embed/${azureBotServiceName}` + "?t=" + token;
+            });
+    </script>
+</body>
+
+</html>
