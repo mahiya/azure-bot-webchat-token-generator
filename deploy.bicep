@@ -86,32 +86,11 @@ resource functionApp 'Microsoft.Web/sites@2020-06-01' = {
           value: 'DefaultEndpointsProtocol=https;AccountName=${storageAccount.name};EndpointSuffix=${environment().suffixes.storage};AccountKey=${listKeys(storageAccount.id, storageAccount.apiVersion).keys[0].value}'
         }
         {
-          name: 'FUNCTION_STORAGE_ACCOUNT_NAME'
-          value: storageAccount.name
-        }
-        {
           name: 'AZURE_BOT_SERVICE_WEB_CHAT_KEY'
           value: botServiceApiKey
         }
       ]
     }
-  }
-}
-
-// Role Definition: Storage Blob Data Contributor
-resource roleDefinition 'Microsoft.Authorization/roleDefinitions@2018-01-01-preview' existing = {
-  scope: storageAccount
-  name: 'ba92f5b4-2d11-453d-a403-e96b0029c9fe'
-}
-
-// Role Assignment: Function App -> Storage (Storage Blob Data Contributor)
-resource roleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
-  scope: storageAccount
-  name: guid(resourceGroup().id, functionApp.id, roleDefinition.id)
-  properties: {
-    roleDefinitionId: roleDefinition.id
-    principalId: functionApp.identity.principalId
-    principalType: 'ServicePrincipal'
   }
 }
 

@@ -27,7 +27,3 @@ functionAppName=`az deployment group create \
 
 # Deploy functions
 func azure functionapp publish $functionAppName --csharp
-
-# Show an URL of the function for a Webhook URL of LINE Messaging API
-echo "You can access deployed a Http trigger function using the following URL:"
-echo https://$functionAppName.azurewebsites.net/api/$httpTriggerFunctionName
