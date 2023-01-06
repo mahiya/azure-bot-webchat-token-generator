@@ -1,11 +1,14 @@
 param location string = resourceGroup().location
 param botServiceApiKey string
-var resourceGroupId = uniqueString(resourceGroup().id)
+param resourcePostfix string = uniqueString(resourceGroup().id)
+param storageAccountName string = 'str${resourcePostfix}'
+param functionAppName string = 'func-${resourcePostfix}'
+param appInsightsName string = 'appi-${resourcePostfix}'
+param appServicePlanName string = 'plan-${resourcePostfix}'
 
 // Azure Storage
-var storageName = 'str${resourceGroupId}'
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
-  name: storageName
+  name: storageAccountName
   location: location
   sku: {
     name: 'Standard_LRS'
@@ -13,11 +16,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
   kind: 'StorageV2'
 }
 
-// Define a name of Azure func App
-var functionAppName = 'func-${resourceGroupId}'
-
 // Azure Application Insights
-var appInsightsName = 'appi-${resourceGroupId}'
 resource appInsights 'Microsoft.Insights/components@2020-02-02-preview' = {
   name: appInsightsName
   location: location
@@ -34,9 +33,8 @@ resource appInsights 'Microsoft.Insights/components@2020-02-02-preview' = {
 }
 
 // Azure App Service Plan
-var hostingPlanName = 'plan-${resourceGroupId}'
-resource hostingPlan 'Microsoft.Web/serverfarms@2020-10-01' = {
-  name: hostingPlanName
+resource appServicePlan 'Microsoft.Web/serverfarms@2020-10-01' = {
+  name: appServicePlanName
   location: location
   sku: {
     name: 'Y1'
@@ -56,7 +54,7 @@ resource functionApp 'Microsoft.Web/sites@2020-06-01' = {
   }
   properties: {
     httpsOnly: true
-    serverFarmId: hostingPlan.id
+    serverFarmId: appServicePlan.id
     clientAffinityEnabled: true
     siteConfig: {
       cors: {
