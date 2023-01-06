@@ -4,16 +4,26 @@
 <head></head>
 
 <body>
-    <iframe id="chat" style="width: 400px; height: 600px;" src=''></iframe>
+    <div id="webchat" style="width: 400px; height: 600px;"></div>
 
+    <script crossorigin="anonymous" src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
     <script>
         const azureFunctionAppName = '';
-        const azureBotServiceName = '';
 
         fetch(`https://${azureFunctionAppName}.azurewebsites.net/api/GenerateBotToken`)
-            .then((resp) => resp.text())
-            .then((token) => {
-                document.getElementById("chat").src = `https://webchat.botframework.com/embed/${azureBotServiceName}` + "?t=" + token;
+            .then((resp) => resp.json())
+            .then((resp) => {
+                const token = resp.token;
+                const userId = resp.userId;
+                window.WebChat.renderWebChat(
+                    {
+                        directLine: window.WebChat.createDirectLine({ token: token }),
+                        userID: userId,
+                        username: 'Sample Web Chat User',
+                        locale: 'ja-JP'
+                    },
+                    document.getElementById('webchat')
+                );
             });
     </script>
 </body>

@@ -31,4 +31,5 @@ Please input Web Chat Key of Azure Bot Service to generate token by Azure Functi
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
-> 参考：[ボットの秘密鍵を取得する](https://learn.microsoft.com/ja-jp/azure/bot-service/bot-service-channel-connect-webchat?view=azure-bot-service-4.0#get-your-bot-secret-key)
+> 参考：[ボットの秘密鍵を取得する](https://learn.microsoft.com/ja-jp/azure/bot-service/rest-api/bot-framework-rest-direct-line-3-0-authentication?view=azure-bot-service-4.0)
+> 参考：[ボットを Web チャットに接続する](https://learn.microsoft.com/ja-jp/azure/bot-service/bot-service-channel-connect-webchat?view=azure-bot-service-4.0#production-embedding-option)
