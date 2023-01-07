@@ -20,10 +20,12 @@ az group create \
 # Deploy the Bicep template
 functionAppName=`az deployment group create \
     --resource-group $resourceGroupName \
-    --template-file deploy.bicep \
+    --template-file bicep/deploy.bicep \
     --parameters botServiceApiKey=$botServiceApiKey \
     --query "properties.outputs.functionAppName.value" \
     --output tsv`
 
 # Deploy functions
+pushd function
 func azure functionapp publish $functionAppName --csharp
+popd
