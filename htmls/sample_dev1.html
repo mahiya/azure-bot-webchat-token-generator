@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head></head>
+
+<body>
+    <!-- 参考：https://learn.microsoft.com/ja-jp/azure/bot-service/bot-service-channel-connect-webchat?view=azure-bot-service-4.0 -->
+    <iframe id="webchat" style="width: 400px; height: 600px;" src=''></iframe>
+
+    <script>
+        const azureFunctionAppName = '';
+        const azureBotServiceName = '';
+
+        fetch(`https://${azureFunctionAppName}.azurewebsites.net/api/GenerateBotToken`)
+            .then((resp) => resp.json())
+            .then((resp) => {
+                document.getElementById("chat").src = `https://webchat.botframework.com/embed/${azureBotServiceName}?t=${resp.token}`;
+            });
+    </script>
+</body>
+
+</html>
