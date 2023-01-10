@@ -6,6 +6,7 @@
 - [Azure Bicep](https://docs.microsoft.com/ja-jp/azure/azure-resource-manager/bicep/install)
 - [.NET 6.0](https://dotnet.microsoft.com/ja-jp/download/dotnet/6.0)
 - [Azure Functions Core Tools](https://learn.microsoft.com/ja-jp/azure/azure-functions/functions-run-local)
+- bash が実行できるコンソール (Windows だと [Git Bash](https://gitforwindows.org/) など)
 
 ## デプロイ方法
 
